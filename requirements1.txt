@@ -1,0 +1,8 @@
+pika
+flask
+flask_migrate
+flask_login
+flask_wtf
+flask_sqlalchemy
+itsdangerous
+json

@@ -6,7 +6,8 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from web_app.token import generate_confirmation_token, confirm_token
 import datetime
-from web_app.email import send_email
+import pika
+import json
 
 @app.route('/')
 @app.route('/index')
@@ -60,8 +61,15 @@ def register():
         token = generate_confirmation_token(user.email)
         confirm_url = url_for('confirm_email', token=token, _external=True)
         html = render_template('activate.html', confirm_url=confirm_url)
-        subject = "Please confirm your email"
-        send_email(user.email, subject, html)
+        data = {'email': user.email, 'text': html}
+        body_ = json.dumps(data)
+
+        params = pika.ConnectionParameters('localhost', 5672)
+        connection = pika.BlockingConnection(params)
+        channel = connection.channel()
+
+        channel.queue_declare(queue = 'random_queue')
+        channel.basic_publish(exchange='',routing_key='random_queue', body=body_)
 
         login_user(user)
 
