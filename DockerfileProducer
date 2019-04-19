@@ -20,19 +20,21 @@ ADD config.py /task1
 
 ADD first_app.py /task1
 
-ADD consumer.py /task1
-
 ADD secret.py /task1
 
 ADD app.db /task1
 
 ADD requirements.txt /task1
 
-ADD requirements1.txt /task1
+ADD requirements_producer.txt /task1
 
-RUN pip install -r /task1/requirements1.txt
+RUN pip install -r /task1/requirements_producer.txt
 
 EXPOSE 72
 
-CMD rabbitmq-server
+ENTRYPOINT ["bash"]
+ENV FLASK_APP=first_app.py
+
+ENTRYPOINT ["flask"]
+CMD ["run"]
 

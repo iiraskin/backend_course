@@ -1,0 +1,23 @@
+version: '3'
+services:
+  rabbitmq:
+    image: "rabbitmq:alpine"
+    ports:
+     - "5672:5672"
+    restart: always
+  producer:
+    build:
+      context: .
+      dockerfile: DockerfileProducer
+    restart: always
+    links:
+     - rabbitmq
+    ports:
+     - "5000:5000"
+  consumer:
+    build:
+      context: .
+      dockerfile: DockerfileConsumer
+    restart: always
+    links:
+     - rabbitmq
