@@ -10,6 +10,10 @@ rm -r /root/.cache
 
 WORKDIR /task1
 
+ADD secret.py /task1
+
+ADD config.py /task1
+
 ADD consumer.py /task1
 
 ADD requirements_consumer.txt /task1

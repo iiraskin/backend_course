@@ -20,8 +20,6 @@ ADD config.py /task1
 
 ADD first_app.py /task1
 
-ADD secret.py /task1
-
 ADD app.db /task1
 
 ADD requirements.txt /task1
