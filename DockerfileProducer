@@ -28,7 +28,7 @@ ADD requirements_producer.txt /task1
 
 RUN pip install -r /task1/requirements_producer.txt
 
-EXPOSE 72
+EXPOSE 80
 
 ENTRYPOINT ["bash"]
 ENV FLASK_APP=first_app.py
