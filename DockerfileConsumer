@@ -20,7 +20,5 @@ ADD requirements_consumer.txt /task1
 
 RUN pip install -r /task1/requirements_consumer.txt
 
-EXPOSE 80
-
 CMD [ "python3", "./consumer.py" ]
 

@@ -11,16 +11,13 @@ def callback(ch, method, properties, body):
     body_ = dict(eval(body))
     email = body_['email']
     text = body_['text']
-    print(email)
-    print()
-    print(text)
     smtpObj = smtplib.SMTP('smtp.gmail.com', 587)
     smtpObj.starttls()
     smtpObj.login(login,password)
     smtpObj.sendmail(login, email, text)
     smtpObj.quit()
 
-params = pika.ConnectionParameters('localhost', 5672)
+params = pika.ConnectionParameters('rabbitmq', 5672)
 connection = pika.BlockingConnection(params)
 channel = connection.channel()
 channel.queue_declare(queue='random_queue')

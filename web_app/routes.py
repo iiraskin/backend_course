@@ -64,7 +64,7 @@ def register():
         data = {'email': user.email, 'text': html}
         body_ = json.dumps(data)
 
-        params = pika.ConnectionParameters('localhost', 5672)
+        params = pika.ConnectionParameters('rabbitmq', 5672)
         connection = pika.BlockingConnection(params)
         channel = connection.channel()
 
